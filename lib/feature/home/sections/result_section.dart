@@ -10,6 +10,7 @@ class ResultSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final result = ref.watch(profitResultProvider);
     final state = ref.watch(analysisProvider);
+    final controller = ref.read(analysisProvider.notifier); // Get the controller
     final textTheme = Theme.of(context).textTheme;
 
     // Formatter for currency values
@@ -55,6 +56,24 @@ class ResultSection extends ConsumerWidget {
         _buildBreakdownRow('(-) 부가세', -vat, currencyFormat),
         const Divider(height: 24),
         _buildBreakdownRow('(=) 최종 순이익', result.netProfit, currencyFormat, isBold: true),
+        const SizedBox(height: 32),
+        Text(
+          '이 계산 결과를 서버에 저장하여 통계 분석에 활용할 수 있습니다.',
+          style: textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => controller.saveCalculationLog(),
+            icon: const Icon(Icons.save),
+            label: const Text('계산 결과 저장하기'),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              textStyle: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
       ],
     );
   }
