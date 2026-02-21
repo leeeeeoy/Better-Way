@@ -1,4 +1,5 @@
 import 'package:better_way/feature/home/controller/analysis_controller.dart';
+import 'package:better_way/feature/home/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,30 +10,31 @@ class SellingSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(analysisProvider);
     final controller = ref.read(analysisProvider.notifier);
+    final textTheme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('판매 정보', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 12),
-        TextFormField(
+        Text('판매 정보', style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 16),
+        CustomTextFormField(
+          label: '판매가',
           initialValue: state.sellingPrice.toString(),
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: '판매가 (원)'),
+          suffix: const Text('원'),
           onChanged: (v) => controller.updateSellingPrice(double.tryParse(v) ?? 0),
         ),
         const SizedBox(height: 16),
-        TextFormField(
+        CustomTextFormField(
+          label: '할인율',
           initialValue: (state.discountRate * 100).toString(),
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: '할인율 (%)'),
+          suffix: const Text('%'),
           onChanged: (v) => controller.updateDiscountRate((double.tryParse(v) ?? 0) / 100),
         ),
         const SizedBox(height: 16),
-        TextFormField(
+        CustomTextFormField(
+          label: '월 판매 수량',
           initialValue: state.quantity.toString(),
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: '월 판매 수량 (개)'),
+          suffix: const Text('개'),
           onChanged: (v) => controller.updateQuantity(double.tryParse(v) ?? 0),
         ),
       ],

@@ -10,7 +10,10 @@ class ResultSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final result = ref.watch(profitResultProvider);
     final state = ref.watch(analysisProvider);
-    final currencyFormat = NumberFormat.currency(locale: 'ko_KR', symbol: '원');
+    final textTheme = Theme.of(context).textTheme;
+
+    // Formatter for currency values
+    final currencyFormat = NumberFormat('#,##0', 'ko_KR');
 
     // Values for breakdown
     final pReal = state.sellingPrice * (1 - state.discountRate);
@@ -24,61 +27,87 @@ class ResultSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('수익 분석 결과', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text('수익 분석 결과', style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         _buildResultCard(
-          '건당 순이익',
-          currencyFormat.format(result.netProfit),
-          '마진율: ${(result.margin * 100).toStringAsFixed(1)}%',
+          context: context,
+          title: '건당 순이익',
+          value: '${currencyFormat.format(result.netProfit)}원',
+          subtitle: '마진율: ${(result.margin * 100).toStringAsFixed(1)}%',
+          isPrimary: true,
         ),
         const SizedBox(height: 12),
-        _buildResultCard('월 예상 순이익', currencyFormat.format(result.monthlyProfit), '판매량: ${state.quantity.toInt()}개 기준'),
+        _buildResultCard(
+          context: context,
+          title: '월 예상 순이익',
+          value: '${currencyFormat.format(result.monthlyProfit)}원',
+          subtitle: '판매량: ${state.quantity.toInt()}개 기준',
+        ),
         const SizedBox(height: 24),
-        const Text('계산 근거 (Breakdown)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        Text('계산 근거 (Breakdown)', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
         const SizedBox(height: 8),
-        _buildBreakdownRow('실제 판매가', pReal),
-        _buildBreakdownRow('(-) 플랫폼/결제 수수료', -fee),
-        _buildBreakdownRow('(-) 매입가', -state.costPrice),
-        _buildBreakdownRow('(-) 배송/포장/광고비', -(state.shippingCost + state.packagingCost + state.adCost)),
-        const Divider(),
-        _buildBreakdownRow('(=) 세전 영업이익', grossProfit, isBold: true),
-        _buildBreakdownRow('(-) 부가세', -vat),
-        const Divider(),
-        _buildBreakdownRow('(=) 최종 순이익', result.netProfit, isBold: true),
+        _buildBreakdownRow('실제 판매가', pReal, currencyFormat),
+        _buildBreakdownRow('(-) 플랫폼/결제 수수료', -fee, currencyFormat),
+        _buildBreakdownRow('(-) 매입가', -state.costPrice, currencyFormat),
+        _buildBreakdownRow('(-) 배송/포장/광고비', -(state.shippingCost + state.packagingCost + state.adCost), currencyFormat),
+        const Divider(height: 24),
+        _buildBreakdownRow('(=) 세전 영업이익', grossProfit, currencyFormat, isBold: true),
+        _buildBreakdownRow('(-) 부가세', -vat, currencyFormat),
+        const Divider(height: 24),
+        _buildBreakdownRow('(=) 최종 순이익', result.netProfit, currencyFormat, isBold: true),
       ],
     );
   }
 
-  Widget _buildResultCard(String title, String value, String subtitle) {
+  Widget _buildResultCard({
+    required BuildContext context,
+    required String title,
+    required String value,
+    required String subtitle,
+    bool isPrimary = false,
+  }) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Card(
-      elevation: 2,
+      elevation: isPrimary ? 4 : 2,
+      color: isPrimary ? colorScheme.primaryContainer : colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: const TextStyle(fontSize: 16)),
+            Text(title, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            Text(value, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              value,
+              style: textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: isPrimary ? colorScheme.onPrimaryContainer : colorScheme.onSurface,
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(subtitle, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+            Text(subtitle, style: textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBreakdownRow(String label, double value, {bool isBold = false}) {
-    final currencyFormat = NumberFormat.currency(locale: 'ko_KR', symbol: '');
+  Widget _buildBreakdownRow(String label, double value, NumberFormat formatter, {bool isBold = false}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
+          Text(label, style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: 16)),
           Text(
-            currencyFormat.format(value),
-            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+            '${formatter.format(value)}원',
+            style: TextStyle(
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              fontSize: 16,
+              fontFamily: 'monospace',
+            ),
           ),
         ],
       ),
