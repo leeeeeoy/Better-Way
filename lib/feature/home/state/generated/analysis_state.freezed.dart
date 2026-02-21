@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AnalysisState {
 
- double get sellingPrice; double get discountRate; double get costPrice; double get shippingCost; double get packagingCost; double get adCost; double get platformFeeRate; double get paymentFeeRate; double get quantity; double? get netProfit; double? get margin; double? get monthlyProfit;
+ double get sellingPrice; double get discountRate; double get costPrice; double get shippingCost; double get packagingCost; double get adCost; double get platformFeeRate; double get paymentFeeRate; double get quantity;
 /// Create a copy of AnalysisState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AnalysisStateCopyWith<AnalysisState> get copyWith => _$AnalysisStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AnalysisState&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&(identical(other.discountRate, discountRate) || other.discountRate == discountRate)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.shippingCost, shippingCost) || other.shippingCost == shippingCost)&&(identical(other.packagingCost, packagingCost) || other.packagingCost == packagingCost)&&(identical(other.adCost, adCost) || other.adCost == adCost)&&(identical(other.platformFeeRate, platformFeeRate) || other.platformFeeRate == platformFeeRate)&&(identical(other.paymentFeeRate, paymentFeeRate) || other.paymentFeeRate == paymentFeeRate)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.netProfit, netProfit) || other.netProfit == netProfit)&&(identical(other.margin, margin) || other.margin == margin)&&(identical(other.monthlyProfit, monthlyProfit) || other.monthlyProfit == monthlyProfit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AnalysisState&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&(identical(other.discountRate, discountRate) || other.discountRate == discountRate)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.shippingCost, shippingCost) || other.shippingCost == shippingCost)&&(identical(other.packagingCost, packagingCost) || other.packagingCost == packagingCost)&&(identical(other.adCost, adCost) || other.adCost == adCost)&&(identical(other.platformFeeRate, platformFeeRate) || other.platformFeeRate == platformFeeRate)&&(identical(other.paymentFeeRate, paymentFeeRate) || other.paymentFeeRate == paymentFeeRate)&&(identical(other.quantity, quantity) || other.quantity == quantity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sellingPrice,discountRate,costPrice,shippingCost,packagingCost,adCost,platformFeeRate,paymentFeeRate,quantity,netProfit,margin,monthlyProfit);
+int get hashCode => Object.hash(runtimeType,sellingPrice,discountRate,costPrice,shippingCost,packagingCost,adCost,platformFeeRate,paymentFeeRate,quantity);
 
 @override
 String toString() {
-  return 'AnalysisState(sellingPrice: $sellingPrice, discountRate: $discountRate, costPrice: $costPrice, shippingCost: $shippingCost, packagingCost: $packagingCost, adCost: $adCost, platformFeeRate: $platformFeeRate, paymentFeeRate: $paymentFeeRate, quantity: $quantity, netProfit: $netProfit, margin: $margin, monthlyProfit: $monthlyProfit)';
+  return 'AnalysisState(sellingPrice: $sellingPrice, discountRate: $discountRate, costPrice: $costPrice, shippingCost: $shippingCost, packagingCost: $packagingCost, adCost: $adCost, platformFeeRate: $platformFeeRate, paymentFeeRate: $paymentFeeRate, quantity: $quantity)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AnalysisStateCopyWith<$Res>  {
   factory $AnalysisStateCopyWith(AnalysisState value, $Res Function(AnalysisState) _then) = _$AnalysisStateCopyWithImpl;
 @useResult
 $Res call({
- double sellingPrice, double discountRate, double costPrice, double shippingCost, double packagingCost, double adCost, double platformFeeRate, double paymentFeeRate, double quantity, double? netProfit, double? margin, double? monthlyProfit
+ double sellingPrice, double discountRate, double costPrice, double shippingCost, double packagingCost, double adCost, double platformFeeRate, double paymentFeeRate, double quantity
 });
 
 
@@ -62,7 +62,7 @@ class _$AnalysisStateCopyWithImpl<$Res>
 
 /// Create a copy of AnalysisState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sellingPrice = null,Object? discountRate = null,Object? costPrice = null,Object? shippingCost = null,Object? packagingCost = null,Object? adCost = null,Object? platformFeeRate = null,Object? paymentFeeRate = null,Object? quantity = null,Object? netProfit = freezed,Object? margin = freezed,Object? monthlyProfit = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? sellingPrice = null,Object? discountRate = null,Object? costPrice = null,Object? shippingCost = null,Object? packagingCost = null,Object? adCost = null,Object? platformFeeRate = null,Object? paymentFeeRate = null,Object? quantity = null,}) {
   return _then(_self.copyWith(
 sellingPrice: null == sellingPrice ? _self.sellingPrice : sellingPrice // ignore: cast_nullable_to_non_nullable
 as double,discountRate: null == discountRate ? _self.discountRate : discountRate // ignore: cast_nullable_to_non_nullable
@@ -73,10 +73,7 @@ as double,adCost: null == adCost ? _self.adCost : adCost // ignore: cast_nullabl
 as double,platformFeeRate: null == platformFeeRate ? _self.platformFeeRate : platformFeeRate // ignore: cast_nullable_to_non_nullable
 as double,paymentFeeRate: null == paymentFeeRate ? _self.paymentFeeRate : paymentFeeRate // ignore: cast_nullable_to_non_nullable
 as double,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,netProfit: freezed == netProfit ? _self.netProfit : netProfit // ignore: cast_nullable_to_non_nullable
-as double?,margin: freezed == margin ? _self.margin : margin // ignore: cast_nullable_to_non_nullable
-as double?,monthlyProfit: freezed == monthlyProfit ? _self.monthlyProfit : monthlyProfit // ignore: cast_nullable_to_non_nullable
-as double?,
+as double,
   ));
 }
 
@@ -88,7 +85,7 @@ as double?,
 
 
 class _AnalysisState implements AnalysisState {
-  const _AnalysisState({required this.sellingPrice, required this.discountRate, required this.costPrice, required this.shippingCost, required this.packagingCost, required this.adCost, required this.platformFeeRate, required this.paymentFeeRate, required this.quantity, this.netProfit, this.margin, this.monthlyProfit});
+  const _AnalysisState({required this.sellingPrice, required this.discountRate, required this.costPrice, required this.shippingCost, required this.packagingCost, required this.adCost, required this.platformFeeRate, required this.paymentFeeRate, required this.quantity});
   
 
 @override final  double sellingPrice;
@@ -100,9 +97,6 @@ class _AnalysisState implements AnalysisState {
 @override final  double platformFeeRate;
 @override final  double paymentFeeRate;
 @override final  double quantity;
-@override final  double? netProfit;
-@override final  double? margin;
-@override final  double? monthlyProfit;
 
 /// Create a copy of AnalysisState
 /// with the given fields replaced by the non-null parameter values.
@@ -114,16 +108,16 @@ _$AnalysisStateCopyWith<_AnalysisState> get copyWith => __$AnalysisStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AnalysisState&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&(identical(other.discountRate, discountRate) || other.discountRate == discountRate)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.shippingCost, shippingCost) || other.shippingCost == shippingCost)&&(identical(other.packagingCost, packagingCost) || other.packagingCost == packagingCost)&&(identical(other.adCost, adCost) || other.adCost == adCost)&&(identical(other.platformFeeRate, platformFeeRate) || other.platformFeeRate == platformFeeRate)&&(identical(other.paymentFeeRate, paymentFeeRate) || other.paymentFeeRate == paymentFeeRate)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.netProfit, netProfit) || other.netProfit == netProfit)&&(identical(other.margin, margin) || other.margin == margin)&&(identical(other.monthlyProfit, monthlyProfit) || other.monthlyProfit == monthlyProfit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AnalysisState&&(identical(other.sellingPrice, sellingPrice) || other.sellingPrice == sellingPrice)&&(identical(other.discountRate, discountRate) || other.discountRate == discountRate)&&(identical(other.costPrice, costPrice) || other.costPrice == costPrice)&&(identical(other.shippingCost, shippingCost) || other.shippingCost == shippingCost)&&(identical(other.packagingCost, packagingCost) || other.packagingCost == packagingCost)&&(identical(other.adCost, adCost) || other.adCost == adCost)&&(identical(other.platformFeeRate, platformFeeRate) || other.platformFeeRate == platformFeeRate)&&(identical(other.paymentFeeRate, paymentFeeRate) || other.paymentFeeRate == paymentFeeRate)&&(identical(other.quantity, quantity) || other.quantity == quantity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sellingPrice,discountRate,costPrice,shippingCost,packagingCost,adCost,platformFeeRate,paymentFeeRate,quantity,netProfit,margin,monthlyProfit);
+int get hashCode => Object.hash(runtimeType,sellingPrice,discountRate,costPrice,shippingCost,packagingCost,adCost,platformFeeRate,paymentFeeRate,quantity);
 
 @override
 String toString() {
-  return 'AnalysisState(sellingPrice: $sellingPrice, discountRate: $discountRate, costPrice: $costPrice, shippingCost: $shippingCost, packagingCost: $packagingCost, adCost: $adCost, platformFeeRate: $platformFeeRate, paymentFeeRate: $paymentFeeRate, quantity: $quantity, netProfit: $netProfit, margin: $margin, monthlyProfit: $monthlyProfit)';
+  return 'AnalysisState(sellingPrice: $sellingPrice, discountRate: $discountRate, costPrice: $costPrice, shippingCost: $shippingCost, packagingCost: $packagingCost, adCost: $adCost, platformFeeRate: $platformFeeRate, paymentFeeRate: $paymentFeeRate, quantity: $quantity)';
 }
 
 
@@ -134,7 +128,7 @@ abstract mixin class _$AnalysisStateCopyWith<$Res> implements $AnalysisStateCopy
   factory _$AnalysisStateCopyWith(_AnalysisState value, $Res Function(_AnalysisState) _then) = __$AnalysisStateCopyWithImpl;
 @override @useResult
 $Res call({
- double sellingPrice, double discountRate, double costPrice, double shippingCost, double packagingCost, double adCost, double platformFeeRate, double paymentFeeRate, double quantity, double? netProfit, double? margin, double? monthlyProfit
+ double sellingPrice, double discountRate, double costPrice, double shippingCost, double packagingCost, double adCost, double platformFeeRate, double paymentFeeRate, double quantity
 });
 
 
@@ -151,7 +145,7 @@ class __$AnalysisStateCopyWithImpl<$Res>
 
 /// Create a copy of AnalysisState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sellingPrice = null,Object? discountRate = null,Object? costPrice = null,Object? shippingCost = null,Object? packagingCost = null,Object? adCost = null,Object? platformFeeRate = null,Object? paymentFeeRate = null,Object? quantity = null,Object? netProfit = freezed,Object? margin = freezed,Object? monthlyProfit = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? sellingPrice = null,Object? discountRate = null,Object? costPrice = null,Object? shippingCost = null,Object? packagingCost = null,Object? adCost = null,Object? platformFeeRate = null,Object? paymentFeeRate = null,Object? quantity = null,}) {
   return _then(_AnalysisState(
 sellingPrice: null == sellingPrice ? _self.sellingPrice : sellingPrice // ignore: cast_nullable_to_non_nullable
 as double,discountRate: null == discountRate ? _self.discountRate : discountRate // ignore: cast_nullable_to_non_nullable
@@ -162,10 +156,7 @@ as double,adCost: null == adCost ? _self.adCost : adCost // ignore: cast_nullabl
 as double,platformFeeRate: null == platformFeeRate ? _self.platformFeeRate : platformFeeRate // ignore: cast_nullable_to_non_nullable
 as double,paymentFeeRate: null == paymentFeeRate ? _self.paymentFeeRate : paymentFeeRate // ignore: cast_nullable_to_non_nullable
 as double,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
-as double,netProfit: freezed == netProfit ? _self.netProfit : netProfit // ignore: cast_nullable_to_non_nullable
-as double?,margin: freezed == margin ? _self.margin : margin // ignore: cast_nullable_to_non_nullable
-as double?,monthlyProfit: freezed == monthlyProfit ? _self.monthlyProfit : monthlyProfit // ignore: cast_nullable_to_non_nullable
-as double?,
+as double,
   ));
 }
 

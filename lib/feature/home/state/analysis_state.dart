@@ -14,8 +14,5 @@ abstract class AnalysisState with _$AnalysisState {
     required double platformFeeRate,
     required double paymentFeeRate,
     required double quantity,
-    double? netProfit,
-    double? margin,
-    double? monthlyProfit,
   }) = _AnalysisState;
 }
