@@ -40,7 +40,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'better-way-frontend' # Replace with your Cloudflare Pages project name
+          projectName: 'better-way' # Replace with your Cloudflare Pages project name
           directory: 'frontend/build/web' # Output directory of Flutter web build
           # For preview deployments on develop branch
           branch: ${{ github.ref == 'refs/heads/develop' && 'develop' || '' }}
