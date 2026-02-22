@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:better_way/core/config/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +38,7 @@ class ApiService {
 }
 
 final apiServiceProvider = Provider<ApiService>((ref) {
-  const workerBaseUrl = 'https://api-betterway.leeeeeoy.xyz';
+  final workerBaseUrl = appConfig.baseUrl;
 
   return ApiService(workerBaseUrl);
 });

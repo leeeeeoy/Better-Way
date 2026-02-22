@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop # Add develop branch
     paths:
       - 'backend/**' # Trigger only on changes in the backend directory
 
@@ -23,8 +24,15 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      - name: Deploy Worker
-        run: npx wrangler deploy
+      - name: Determine environment and deploy
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            npm run deploy:prod
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            npm run deploy:dev
+          else
+            echo "Not deploying from main or develop branch."
+          fi
         working-directory: ./backend
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop # Add develop branch
     paths:
       - 'frontend/**' # Trigger only on changes in the frontend directory
 
@@ -24,7 +25,14 @@ jobs:
         working-directory: ./frontend
 
       - name: Build Flutter web app
-        run: flutter build web --release
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            flutter build web --release --target=lib/main.dart
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            flutter build web --release --target=lib/main_dev.dart
+          else
+            flutter build web --release # Default for other branches, can be adjusted
+          fi
         working-directory: ./frontend
 
       - name: Deploy to Cloudflare Pages
@@ -32,7 +40,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'better-way-frontend' # Replace with your Cloudflare Pages project name
+          projectName: 'better-way' # Replace with your Cloudflare Pages project name
           directory: 'frontend/build/web' # Output directory of Flutter web build
-          # Optional: If you have a custom build command in Cloudflare Pages, you might not need to specify this here.
-          # command: 'flutter build web --release'
+          # For preview deployments on develop branch
+          branch: ${{ github.ref == 'refs/heads/develop' && 'develop' || '' }}
