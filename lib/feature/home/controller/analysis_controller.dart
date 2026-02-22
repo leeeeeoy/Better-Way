@@ -63,17 +63,6 @@ class AnalysisController extends Notifier<AnalysisState> {
     }
 
     final currentInputs = state;
-    final currentResult = ProfitCalculator.calculate(
-      sellingPrice: currentInputs.sellingPrice,
-      discountRate: currentInputs.discountRate,
-      costPrice: currentInputs.costPrice,
-      shippingCost: currentInputs.shippingCost,
-      packagingCost: currentInputs.packagingCost,
-      adCost: currentInputs.adCost,
-      platformFeeRate: currentInputs.platformFeeRate,
-      paymentFeeRate: currentInputs.paymentFeeRate,
-      quantity: currentInputs.quantity,
-    );
 
     final payload = {
       'clientId': _clientId,
@@ -86,9 +75,6 @@ class AnalysisController extends Notifier<AnalysisState> {
       'platformFeeRate': currentInputs.platformFeeRate,
       'paymentFeeRate': currentInputs.paymentFeeRate,
       'quantity': currentInputs.quantity,
-      'netProfit': currentResult.netProfit,
-      'margin': currentResult.margin,
-      'monthlyProfit': currentResult.monthlyProfit,
     };
 
     try {
