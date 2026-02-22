@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // Import dotenv
 
 class ApiService {
   final String baseUrl;
@@ -38,7 +37,7 @@ class ApiService {
 }
 
 final apiServiceProvider = Provider<ApiService>((ref) {
-  final workerBaseUrl = dotenv.env['WORKER_BASE_URL']!;
+  const workerBaseUrl = 'https://api-betterway.leeeeeoy.xyz';
 
   return ApiService(workerBaseUrl);
 });

@@ -63,7 +63,6 @@ class AnalysisController extends Notifier<AnalysisState> {
     }
 
     final currentInputs = state;
-    final currentResult = ref.read(profitResultProvider);
 
     final payload = {
       'clientId': _clientId,
@@ -76,9 +75,6 @@ class AnalysisController extends Notifier<AnalysisState> {
       'platformFeeRate': currentInputs.platformFeeRate,
       'paymentFeeRate': currentInputs.paymentFeeRate,
       'quantity': currentInputs.quantity,
-      'netProfit': currentResult.netProfit,
-      'margin': currentResult.margin,
-      'monthlyProfit': currentResult.monthlyProfit,
     };
 
     try {

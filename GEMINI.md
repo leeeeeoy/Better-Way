@@ -72,20 +72,30 @@ MVP는 반드시 최소 기능으로 유지한다.
 
 ## 4. 프로젝트 구조
 
-lib/
- ├─ router/
- │   └─ app_router.dart
- ├─ features/
- │   └─ home/
- │       ├─ home_screen.dart
- │       ├─ sections/
- │       │    ├─ selling_section.dart
- │       │    ├─ cost_section.dart
- │       │    ├─ fee_section.dart
- │       │    └─ result_section.dart
- │       ├─ state/analysis_state.dart
- │       ├─ controller/analysis_controller.dart
- │       └─ calculator/profit_calculator.dart
+프로젝트 루트 (better_way/)
+├── frontend/ (Flutter 프로젝트)
+│   ├── lib/
+│   │   ├─ router/
+│   │   │   └─ app_router.dart
+│   │   ├─ features/
+│   │   │   └─ home/
+│   │   │       ├─ home_screen.dart
+│   │   │       ├─ sections/
+│   │   │       │    ├─ selling_section.dart
+│   │   │       │    ├─ cost_section.dart
+│   │   │       │    ├─ fee_section.dart
+│   │   │       │    └─ result_section.dart
+│   │   │       ├─ state/analysis_state.dart
+│   │   │       ├─ controller/analysis_controller.dart
+│   │   │       └─ calculator/profit_calculator.dart
+│   └── ... (기타 Flutter 관련 파일 및 디렉토리: pubspec.yaml, analysis_options.yaml 등)
+├── backend/ (Cloudflare Worker 프로젝트)
+│   ├── src/
+│   │   └── index.ts
+│   ├── wrangler.jsonc
+│   └── ... (기타 Worker 관련 파일 및 디렉토리: package.json, migrations 등)
+└── .github/ (CI/CD 워크플로우)
+└── ... (기타 모노레포 루트 파일: .gitignore, README.md 등)
 
 원칙:
 - 계산 로직은 UI와 완전히 분리

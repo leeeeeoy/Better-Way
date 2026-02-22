@@ -167,3 +167,5 @@ dist
 .wrangler/
 
 schema.sql
+
+migrations/
