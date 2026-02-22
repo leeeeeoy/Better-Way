@@ -36,37 +36,7 @@ export default {
 			});
 		}
 
-		// 1. 미션 완료 기록 저장 (POST /api/action)
-		if (request.method === "POST" && url.pathname === "/api/action") {
-			const body = await request.json() as ActionRequest;
-
-			const { deviceId, actionType } = body;
-
-			if (!deviceId || !actionType) {
-				return new Response(JSON.stringify({ error: "Missing deviceId or actionType" }), {
-					status: 400,
-					headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
-				});
-			}
-
-			await env.DB.prepare(
-				"INSERT INTO user_actions (device_id, action_type) VALUES (?, ?)"
-			).bind(deviceId, actionType).run();
-
-			return new Response(JSON.stringify({ success: true }), {
-				headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
-			});
-		}
-
-		// 2. 전체 카운트 조회 (GET /api/stats)
-		if (url.pathname === "/api/stats") {
-			const total = await env.DB.prepare("SELECT COUNT(*) as count FROM user_actions").first();
-			return new Response(JSON.stringify(total), {
-				headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
-			});
-		}
-
-		// 3. 계산 로그 저장 (POST /api/log_calculation)
+		// 계산 로그 저장 (POST /api/log_calculation)
 		if (request.method === "POST" && url.pathname === "/api/log_calculation") {
 			let body: CalculationLogRequest;
 			try {

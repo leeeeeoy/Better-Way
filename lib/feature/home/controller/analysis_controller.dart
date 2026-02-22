@@ -63,7 +63,17 @@ class AnalysisController extends Notifier<AnalysisState> {
     }
 
     final currentInputs = state;
-    final currentResult = ref.read(profitResultProvider);
+    final currentResult = ProfitCalculator.calculate(
+      sellingPrice: currentInputs.sellingPrice,
+      discountRate: currentInputs.discountRate,
+      costPrice: currentInputs.costPrice,
+      shippingCost: currentInputs.shippingCost,
+      packagingCost: currentInputs.packagingCost,
+      adCost: currentInputs.adCost,
+      platformFeeRate: currentInputs.platformFeeRate,
+      paymentFeeRate: currentInputs.paymentFeeRate,
+      quantity: currentInputs.quantity,
+    );
 
     final payload = {
       'clientId': _clientId,
